@@ -3,8 +3,8 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path('main/', ManageCourseListView.as_view(), name='main'),
-    path('create/', CourseUpdateView.as_view(), name='create'),
-    path('<pk>/update/', CourseUpdateView.as_view(), name='edit'),
-    path('<pk>/delete/', CourseDeleteView.as_view(), name='delete'),
+    path('mine/', ManageCourseListView.as_view(), name='mine'),
+    path('create/', CourseCreateView.as_view(), name='course_create'),
+    path('<pk>/update/', CourseUpdateView.as_view(), name='course_edit'),
+    path('<pk>/delete/', CourseDeleteView.as_view(), name='course_delete'),
 ]
