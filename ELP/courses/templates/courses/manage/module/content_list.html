@@ -13,7 +13,7 @@
             <h3>Modules</h3>
             <ul id="modules">
                 {% for m in course.modules.all %}
-                    <li data-id="{{ m.id }}" {% if m == module %} class="selected"{% endif %}>
+                    <li id="{{ m.id }}" {% if m == module %} class="m selected" {% else %} class="m" {% endif %} draggable="true">
                         <a href="{% url 'module_content_list' m.id %}">
                             <span>Module <span class="order">{{ m.order|add:1 }}</span></span>
                             <br>
