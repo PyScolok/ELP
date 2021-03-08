@@ -71,14 +71,14 @@ class ContentCreateUpdateView(TemplateResponseMixin, View):
         self.module = get_object_or_404(Module, id=kwargs['module_id'], course__owner=request.user)
         self.model = self.get_model(kwargs['model_name'])
         if id:
-            self.obj = get_object_or_404(self.model, id=kwargs['id'], owner=request.user)
-        return super().dispatch(request, *args, **kwargs)
+            self.obj = get_object_or_404(self.model, id=id, owner=request.user)
+        return super().dispatch(request, *args, id, **kwargs)
 
     def get(self, request, *args, **kwargs):
         form = self.get_form(self.model, instance=self.obj)
         return self.render_to_response({'form': form, 'object': self.obj})
 
-    def post(self, request, id=None):
+    def post(self, request, *args, id=None, **kwargs):
         form = self.get_form(self.model, instance=self.obj, data=request.POST, files=request.FILES)
         if form.is_valid():
             obj = form.save(commit=False)
@@ -115,6 +115,7 @@ class ModuleOrderView(CsrfExemptMixin, JsonRequestResponseMixin, View):
 
 class ContentOrderView(CsrfExemptMixin, JsonRequestResponseMixin, View):
     def post(self, request):
+        print(self.request_json.items())
         for id, order in self.request_json.items():
             Content.objects.filter(id=id, module__course__owner=request.user).update(order=order)
         return self.render_json_response({'saved': 'OK'})

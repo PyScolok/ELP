@@ -13,7 +13,7 @@
             <h3>Modules</h3>
             <ul id="modules">
                 {% for m in course.modules.all %}
-                    <li id="{{ m.id }}" {% if m == module %} class="m selected" {% else %} class="m" {% endif %} draggable="true">
+                    <li id="{{ m.id }}" {% if m == module %} class="module-item selected" {% else %} class="module-item" {% endif %} draggable="true">
                         <a href="{% url 'module_content_list' m.id %}">
                             <span>Module <span class="order">{{ m.order|add:1 }}</span></span>
                             <br>
@@ -30,12 +30,12 @@
             <h2>Module {{ module.order|add:1 }}: {{ module.title }}</h2>
             <h3>Module contents:</h3>
             <div id="module-contents">
-                {% for content in module.contents.all %}
-                    <div data-id="{{ content.id }}">
+                {% for content in module.content.all %}
+                    <div id="{{ content.id }}" class="content-item" draggable="true">
                         {% with item=content.item %}
                             <p>{{ item }} ({{ item|model_name }})</p>
                             <a href="{% url 'module_content_update' module.id item|model_name item.id %}">Edit</a>
-                            <form action="{% url 'module_content_delete' content.id%}" method="post">
+                            <form action="{% url 'module_content_delete' content.id %}" method="post">
                                  <input type="submit" value="Delete">
                                  {% csrf_token %}
                             </form>

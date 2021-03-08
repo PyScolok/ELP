@@ -98,11 +98,8 @@ h1 {
     cursor: move;
 }
 
-.contents  ul li.m.dragging {
 
-}
-
-.contents ul li.m.selected {
+.contents ul li.module-item.selected {
     background: #3f3f3f;
 }
 
@@ -218,10 +215,19 @@ ul#course-modules li:hover {
     background: #ccc;
 }
 
+#module-contents {
+    padding: 15px 0;
+}
+
 #module-contents div {
+    margin: 15px 0;
     padding: 10px 20px;
     border: 1px solid #ccc;
     background: #fff
+}
+
+.dragging {
+
 }
 
 #module-contents form {
@@ -230,12 +236,15 @@ ul#course-modules li:hover {
 }
 
 #module-contents input[type=submit] {
+    width: auto;
     color: #3fad37;
     background: none;
     margin: -20px 0 0;
     padding: 0;
-    float: left;
+    float: right;
     text-transform: none;
+    cursor: pointer;
+
 }
 
 #module-contents div:hover {
