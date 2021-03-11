@@ -13,6 +13,12 @@ class DragAndDrop {
             element.addEventListener('dragstart', () => {
                 element.classList.add('dragging');
             })
+        })
+    }
+
+    dragEndEventHandler() {
+        let elements = this.getElements()
+        elements.forEach(element => {
             element.addEventListener('dragend', () => {
                 element.classList.remove('dragging');
             })
@@ -82,11 +88,11 @@ class DragAndDrop {
 
     dragAndDrop() {
         this.dragStartEventHandler();
+        this.dragEndEventHandler();
         this.dragOverEventHandler();
         this.dropEventHandler();
     }
 }
-
 
 class ModuleDragAndDrop extends DragAndDrop {
     dropEventHandler() {
